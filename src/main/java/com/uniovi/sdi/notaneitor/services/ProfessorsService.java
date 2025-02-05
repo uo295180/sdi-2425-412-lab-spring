@@ -40,12 +40,12 @@ public class ProfessorsService {
         professors.set(index, professor);
     }
 
-    public String detailsProfessor(Long id) {
+    public Professor detailsProfessor(Long id) {
         for (Professor professor : professors) {
             if (professor.getId().equals(id)) {
-                return professor.toString();
+                return professor;
             }
         }
-        return "Id no encontrado";
+        return null;
     }
 }

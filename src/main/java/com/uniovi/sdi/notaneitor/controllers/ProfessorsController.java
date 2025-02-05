@@ -4,11 +4,12 @@ import com.uniovi.sdi.notaneitor.entities.Professor;
 import com.uniovi.sdi.notaneitor.services.ProfessorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
 
-@RestController
+@Controller
 @RequestMapping("/professor")
 public class ProfessorsController {
 
@@ -16,41 +17,42 @@ public class ProfessorsController {
     private ProfessorsService professorsService;
 
     @RequestMapping("/list")
-    public String getList() {
-        return professorsService.getProfessors().toString();
+    public String getList(Model professorModel) {
+        professorModel.addAttribute("professorsList", professorsService.getProfessors());
+        return "professor/list";
     }
 
     @RequestMapping("/add")
     public String getAdd() {
-        return "Añadir professor";
+        return "professor/add";
     }
 
     @RequestMapping("/details")
-    public String getDetails(@RequestParam("id") Long id) {
-        return professorsService.detailsProfessor(id);
+    public String getDetails(Model professorModel, @RequestParam("id") Long id) {
+        professorModel.addAttribute("professor", professorsService.detailsProfessor(id));
+        return "professor/details";
     }
 
     @RequestMapping("/edit/{id}")
     public String getEdit(@PathVariable Long id) {
-        return "Editando profesor";
+        return "professor/edit";
     }
 
     @RequestMapping("/delete/{id}")
     public String getDelete(@PathVariable Long id) {
-        int numprof = professorsService.getProfessors().size();
         professorsService.removeProfessor(id);
-        return (numprof-1 == professorsService.getProfessors().size() ? "Ok" : "Id no encontrado") + " ->\n" + professorsService.getProfessors().toString();
+        return "redirect:/professor/list";
     }
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String postAdd(@ModelAttribute Professor professor) {
         professorsService.addProfessor(professor);
-        return "Ok";
+        return "redirect:/professor/list";
     }
 
     @RequestMapping(value="/edit", method = RequestMethod.POST)
     public String postEdit(@ModelAttribute Professor professor) {
         professorsService.addProfessor(professor);
-        return "redirect:/details/"+professor.getId();
+        return "redirect:/professor/details/"+professor.getId();
     }
 }
