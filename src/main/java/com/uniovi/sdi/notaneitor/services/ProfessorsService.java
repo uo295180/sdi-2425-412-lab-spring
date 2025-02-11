@@ -2,7 +2,7 @@ package com.uniovi.sdi.notaneitor.services;
 
 import com.uniovi.sdi.notaneitor.entities.Professor;
 import com.uniovi.sdi.notaneitor.repository.ProfessorsRepository;
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,7 @@
 package com.uniovi.sdi.notaneitor.entities;
 
-import jakarta.persistence.*;
+
+import javax.persistence.*;
 
 @Entity
 public class Mark {

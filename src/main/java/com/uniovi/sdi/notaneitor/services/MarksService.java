@@ -2,7 +2,6 @@ package com.uniovi.sdi.notaneitor.services;
 
 import com.uniovi.sdi.notaneitor.entities.Mark;
 import com.uniovi.sdi.notaneitor.repository.MarksRepository;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
