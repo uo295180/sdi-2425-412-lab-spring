@@ -2,9 +2,12 @@ package com.uniovi.sdi.notaneitor.controllers;
 
 import com.uniovi.sdi.notaneitor.entities.Professor;
 import com.uniovi.sdi.notaneitor.services.ProfessorsService;
+import com.uniovi.sdi.notaneitor.validators.AddProfessorFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
@@ -13,8 +16,13 @@ import java.lang.reflect.Method;
 @RequestMapping("/professor")
 public class ProfessorsController {
 
+    private final AddProfessorFormValidator addProfessorFormValidator;
     @Autowired
     private ProfessorsService professorsService;
+
+    public ProfessorsController(AddProfessorFormValidator addProfessorFormValidator) {
+        this.addProfessorFormValidator = addProfessorFormValidator;
+    }
 
     @RequestMapping("/list")
     public String getList(Model professorModel) {
@@ -23,7 +31,8 @@ public class ProfessorsController {
     }
 
     @RequestMapping("/add")
-    public String getAdd() {
+    public String getAdd(Model model) {
+        model.addAttribute("professor", new Professor());
         return "professor/add";
     }
 
@@ -46,7 +55,13 @@ public class ProfessorsController {
     }
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public String postAdd(@ModelAttribute Professor professor) {
+    public String postAdd(@Validated Professor professor, BindingResult result) {
+        addProfessorFormValidator.validate(professor, result);
+        if (result.hasErrors()) {
+            return "professor/add";
+        }
+
+
         professorsService.addProfessor(professor);
         return "redirect:/professor/list";
     }

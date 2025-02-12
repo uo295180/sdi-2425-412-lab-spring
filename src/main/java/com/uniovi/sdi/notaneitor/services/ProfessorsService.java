@@ -42,4 +42,8 @@ public class ProfessorsService {
         Optional<Professor> op =professorsRepository.findById(id);
         return op.orElse(null);
     }
+
+    public Professor getProfessorsByDni(String dni) {
+        return professorsRepository.findByDni(dni);
+    }
 }

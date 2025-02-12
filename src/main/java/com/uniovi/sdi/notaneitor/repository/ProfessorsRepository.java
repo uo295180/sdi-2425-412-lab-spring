@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ProfessorsRepository extends CrudRepository<Professor, Long> {
 
+    Professor findByDni(String dni);
 }
