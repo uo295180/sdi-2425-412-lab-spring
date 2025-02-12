@@ -38,4 +38,11 @@ public class UsersService {
     public void deleteUser(Long id) {
         usersRepository.deleteById(id);
     }
+    public void updateUser(User user) {
+        User oldUser = usersRepository.findById(user.getId()).get();
+        oldUser.setDni(user.getDni());
+        oldUser.setName(user.getName());
+        oldUser.setLastName(user.getLastName());
+        usersRepository.save(oldUser);
+    }
 }
