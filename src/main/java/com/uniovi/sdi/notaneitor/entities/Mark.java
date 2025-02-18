@@ -2,6 +2,7 @@ package com.uniovi.sdi.notaneitor.entities;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Mark {
@@ -69,5 +70,13 @@ public class Mark {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mark mark = (Mark) o;
+        return Objects.equals(id, mark.id);
     }
 }
