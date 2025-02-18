@@ -41,10 +41,10 @@ public class InsertSampleDataService {
         user6.setRole(rolesService.getRoles()[2]);
         Set user1Marks = new HashSet<Mark>() {
             {
-                add(new Mark("Nota B1", 5.0, user2));
-                add(new Mark("Nota B2", 4.3, user2));
-                add(new Mark("Nota B3", 8.0, user2));
-                add(new Mark("Nota B4", 3.5, user2));
+                add(new Mark("Nota A1", 5.0, user1));
+                add(new Mark("Nota A2", 4.3, user1));
+                add(new Mark("Nota A3", 8.0, user1));
+                add(new Mark("Nota A4", 3.5, user1));
             }
         };
         user1.setMarks(user1Marks);
