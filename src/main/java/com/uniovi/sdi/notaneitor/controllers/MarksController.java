@@ -24,7 +24,9 @@ public class MarksController {
     private final UsersService usersService;
     private final HttpSession httpSession;
 
-    public MarksController(MarksService marksService, UsersService usersService, AddMarkFormValidator addMarkFormValidator, HttpSession httpSession) {
+    public MarksController(MarksService marksService, UsersService usersService,
+                           AddMarkFormValidator addMarkFormValidator, HttpSession httpSession) {
+
         this.marksService = marksService;
         this.usersService = usersService;
         this.addMarkFormValidator = addMarkFormValidator;
@@ -32,10 +34,18 @@ public class MarksController {
     }
 
     @RequestMapping("/mark/list")
-    public String getList(Model model, Principal principal) {
+    public String getList(Model model, Principal principal,
+                          @RequestParam(value="", required = false) String searchText) {
+
         String dni = principal.getName();
         User user = usersService.getUserByDni(dni);
-        model.addAttribute("markList", marksService.getMarksForUser(user));
+        if(searchText != null && !searchText.isEmpty()) {
+            model.addAttribute("markList",
+                    marksService.searchMarksByDescriptionAndNameForUser(searchText, user));
+        } else {
+            model.addAttribute("markList", marksService.getMarksForUser(user));
+        }
+
         return "mark/list";
     }
 
