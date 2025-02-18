@@ -11,6 +11,7 @@ public class Mark {
     private Long id;
     private String description;
     private Double score;
+    private boolean resend = false;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
@@ -71,6 +72,10 @@ public class Mark {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Boolean getResend() { return resend; }
+
+    public void setResend(boolean resend) { this.resend = resend; }
 
     @Override
     public boolean equals(Object o) {
