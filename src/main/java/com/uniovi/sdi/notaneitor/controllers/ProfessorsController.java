@@ -36,8 +36,8 @@ public class ProfessorsController {
         return "professor/add";
     }
 
-    @RequestMapping("/details")
-    public String getDetails(Model professorModel, @RequestParam("id") Long id) {
+    @RequestMapping("/details/{id}")
+    public String getDetails(Model professorModel, @PathVariable Long id) {
         professorModel.addAttribute("professor", professorsService.detailsProfessor(id));
         return "professor/details";
     }
@@ -70,6 +70,6 @@ public class ProfessorsController {
     public String postEdit(@ModelAttribute Professor professor, @PathVariable Long id) {
         professor.setId(id);
         professorsService.addProfessor(professor);
-        return "redirect:/professor/details?id="+id;
+        return "redirect:/professor/details/"+id;
     }
 }

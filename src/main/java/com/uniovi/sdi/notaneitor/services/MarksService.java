@@ -61,7 +61,7 @@ public class MarksService {
         if(user.getRole().equals("ROLE_STUDENT")) {
             marks = marksRepository.findAllByUser(pageable, user);
         }
-        if(user.getRole().equals("ROLE_PROFESSOR")) {
+        if(user.getRole().equals("ROLE_PROFESSOR") || user.getRole().equals("ROLE_ADMIN")) {
             marks = getMarks(pageable);
         }
         return marks;

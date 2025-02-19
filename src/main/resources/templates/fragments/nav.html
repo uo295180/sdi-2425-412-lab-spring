@@ -18,7 +18,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/mark/list">Ver Notas</a>
-                    <a class="dropdown-item" href="/mark/add" sec:authorize="hasRole('ROLE_PROFESSOR')">Agregar Nota</a>
+                    <a class="dropdown-item" href="/mark/add" sec:authorize="hasAnyRole('ROLE_PROFESSOR','ROLE_ADMIN')">Agregar Nota</a>
 
                 </div>
             </li>
@@ -27,16 +27,17 @@
                     Gestión de usuarios
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/user/add">Agregar usuario</a>
                     <a class="dropdown-item" href="/user/list">Ver usuarios</a>
+                    <a class="dropdown-item" href="/user/add">Agregar usuario</a>
                 </div>
             </li>
-            <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="profesorDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"> Gestión de profesores
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/professor/list">Ver profesores</a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" href="/professor/add">Agregar profesor</a>
                 </div>
             </li>
         </ul>
