@@ -107,7 +107,8 @@ public class MarksController {
         User user = usersService.getUserByDni(dni);
         Page<Mark> marks = marksService.getMarksForUser(pageable, user);
         model.addAttribute("markList", marks.getContent() );
-        return "mark/list :: marksTable";
+        model.addAttribute("page", marks);
+        return "fragments/marksTable";
     }
 
     @RequestMapping(value = "/mark/{id}/resend", method = RequestMethod.GET)
