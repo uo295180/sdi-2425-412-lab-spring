@@ -123,9 +123,55 @@ public class NotaneitorApplicationTests {
 
     @Test
     @Order(9)
-    public void PR09(){}
+    public void PR07(){
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "99999990A", "123456");
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
 
     @Test
     @Order(10)
-    public void PR10(){}
+    public void PR08(){
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "99999993D", "123456");
+        String checkText = "detalles";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(11)
+    public void PR09(){
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "99999988F", "123456");
+        String checkText = "Gestión de usuarios";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(12)
+    public void PR10(){
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "99999990A", "12345");
+        String checkText = "Identifícate";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(13)
+    public void PR11(){
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "99999990A", "123456");
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+        PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
+        checkText = "Identifícate";
+        result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
 }
