@@ -1,5 +1,6 @@
 package com.uniovi.sdi.notaneitor;
 
+import com.uniovi.sdi.notaneitor.pageobjects.PO_NavView;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -47,7 +48,9 @@ public class NotaneitorApplicationTests {
 
     @Test
     @Order(1)
-    public void PR01(){}
+    public void PR01(){
+        PO_NavView.changeLanguage(driver, "btnEnglish");
+    }
 
     @Test
     @Order(2)
