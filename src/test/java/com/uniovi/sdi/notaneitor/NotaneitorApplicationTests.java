@@ -1,10 +1,15 @@
 package com.uniovi.sdi.notaneitor;
 
+import com.uniovi.sdi.notaneitor.pageobjects.PO_HomeView;
 import com.uniovi.sdi.notaneitor.pageobjects.PO_NavView;
+import com.uniovi.sdi.notaneitor.pageobjects.PO_Properties;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -48,25 +53,36 @@ public class NotaneitorApplicationTests {
 
     @Test
     @Order(1)
-    public void PR01(){
-        PO_NavView.changeLanguage(driver, "btnEnglish");
+    public void PR01A(){
+        PO_HomeView.checkWelcomeToPage(driver, PO_Properties.getSPANISH());
     }
 
     @Test
     @Order(2)
-    public void PR02(){}
+    public void PR01B(){
+        List<WebElement> welcomeMessageElement = PO_HomeView.getWelcomeMessageText(driver, PO_Properties.getSPANISH());
+        Assertions.assertEquals(welcomeMessageElement.get(0).getText(),
+                PO_HomeView.getP().getString("welcome.message", PO_Properties.getSPANISH()));
+    }
 
     @Test
     @Order(3)
-    public void PR03(){}
+    public void PR02(){
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+    }
 
     @Test
     @Order(4)
-    public void PR04(){}
+    public void PR03(){
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+    }
 
     @Test
     @Order(5)
-    public void PR05(){}
+    public void PR04(){
+        PO_HomeView.checkChangeLanguage(driver, "btnSpanish", "btnEnglish",
+                PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+    }
 
     @Test
     @Order(6)
