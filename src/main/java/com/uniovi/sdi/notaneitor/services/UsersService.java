@@ -3,9 +3,14 @@ package com.uniovi.sdi.notaneitor.services;
 import com.uniovi.sdi.notaneitor.entities.User;
 import com.uniovi.sdi.notaneitor.repository.UsersRepository;
 import javax.annotation.PostConstruct;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Service
@@ -44,5 +49,12 @@ public class UsersService {
         oldUser.setName(user.getName());
         oldUser.setLastName(user.getLastName());
         usersRepository.save(oldUser);
+    }
+
+    public Page<User> searchUserByNameAndSurname(Pageable pageable, String searchText) {
+        Page<User> users = new PageImpl<User>(new LinkedList<User>());
+        searchText='%'+searchText+'%';
+        users = usersRepository.searchByNameAndSurname(pageable, searchText);
+        return users;
     }
 }
