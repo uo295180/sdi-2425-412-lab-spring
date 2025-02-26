@@ -47,5 +47,14 @@ public class PO_NavView extends PO_View{
                 getTimeout());
         Selectedlanguage.get(0).click();
     }
+
+    public static void goToNavOption(WebDriver driver, String xpath, String ref) {
+        clickOnPath(driver, "//*[@id='myNavbar']"+xpath, 0);
+        clickOnPath(driver, "//a[contains(@href, '" + ref + "')]", 0);
+    }
+
+    public static void clickOnPath(WebDriver driver, String xpath, int index) {
+        PO_View.checkElementBy(driver, "free", xpath).get(index).click();
+    }
 }
 
